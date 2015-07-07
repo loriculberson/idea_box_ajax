@@ -1,0 +1,32 @@
+<h2> My Ideas </h2>
+
+<%= render partial: "form" %>
+
+<div class="ideas-list">
+ 
+  <h3>Listing Todos</h3>
+  <table class="table table-condensed table-striped">
+    <thead>
+      <tr class="danger">
+        <th>Title</th>
+        <th>Details</th>
+        <th>How baller is it?</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @ideas.each do |idea| %>
+        <tr>
+          <td><%= link_to idea.title, idea %></td>
+          <td><%= idea.body %></td>
+          <td><%= idea.quality %></td>
+          <td><%= link_to 'Edit', edit_idea_path(idea), remote: true, class: 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Delete', idea, remote: true, class: 'btn btn-warning btn-xs',
+                  method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>

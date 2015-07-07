@@ -1,0 +1,25 @@
+// Place all the styles related to the Ideas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.border-shadow {
+  img {
+  border: 5px solid #FFF;  
+  box-shadow: 10px 10px 5px #888888;
+  border-width: 1px;
+  border-bottom-width: 20px;
+  margin-top: 10px;
+  }
+}
+
+
+.red{
+    color:red;
+    }
+.form-area
+{
+  border-radius: 10px;
+  background-color: #FAFAFA;
+  padding: 10px 40px 60px;
+  margin: 10px 0px 60px;
+  border: 1px solid GREY;
+  }
