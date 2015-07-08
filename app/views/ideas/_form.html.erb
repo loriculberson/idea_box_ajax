@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-6">
     <div class="form-area">  
-    <%= form_for(:idea, url: ideas_path, remote: true, method: :post, role:"form") do |f| %>
+    <%= form_for(:idea, url: ideas_path, method: :post, html: { id: "idea-form" }, role:"form") do |f| %>
 
       <div class="errors">
       </div>
@@ -16,7 +16,7 @@
         <%= f.text_area :body, cols: 58, rows: 4  %>
       </div>
 
-  <h4> Idea Quality </h4>
+  <h5> Idea Quality </h5>
       <div>
         <%= f.label :quality_swill do %>
           <%= f.radio_button(:quality, "swill", checked: true) %> swill
@@ -24,19 +24,19 @@
       </div>
 
       <div>
-        <%= f.label :plausible do %>
+        <%= f.label :quality_plausible do %>
           <%= f.radio_button(:quality, "plausible") %> plausible
         <% end %>
       </div>
 
       <div>
-        <%= f.label :genius do %>
+        <%= f.label :quality_genius do %>
         <%= f.radio_button(:quality, "genius") %> genius
         <% end %>
       </div>
 
       <div>
-        <%= f.submit "Save!", class: "class: btn btn-primary" %>
+        <%= f.submit "Save!", id: "create-idea", class: "class: btn btn-primary" %>
       </div>
 
       <% end %>

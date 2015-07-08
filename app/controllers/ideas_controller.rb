@@ -6,9 +6,7 @@ class IdeasController < ApplicationController
   end
 
   def index
-    @ideas = Idea.all 
-
-    respond_with @ideas
+    @ideas = Idea.desc_sorted
   end
 
   def create
@@ -35,5 +33,4 @@ class IdeasController < ApplicationController
   def ideas_params
     params.require(:idea).permit(:title, :body, :quality)
   end
-
 end
