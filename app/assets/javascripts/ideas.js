@@ -39,3 +39,5 @@ var addIdeaToTable = function(idea) {
 var clearIdeaForm = function() {
   $("#idea-form")[0].reset();
 };
+
+
