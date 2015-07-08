@@ -15,16 +15,25 @@ RSpec.configure do |config|
 
   config.use_transactional_fixtures = true
 
+   Capybara.register_driver :selenium_firefox do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :firefox)
+  end
+  Capybara.javascript_driver = :selenium_firefox
+
+  config.use_transactional_fixtures = false
+
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  # config.around(:each) do |example|
-  #   DatabaseCleaner.cleaning do
-  #     example.run
-  #   end
-  # end
+  config.before(:each) do |example|
+    DatabaseCleaner.strategy= example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
   
   config.infer_spec_type_from_file_location!
 end

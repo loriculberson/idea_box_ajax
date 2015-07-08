@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe type: :feature do 
+RSpec.describe "user creates idea", js: true, type: :feature do
 
-  it "can create an idea that shows up on the home page" do
+  it "shows up on the home page" do
     visit '/'
     fill_in "idea[title]", with: "Amazing idea"
     fill_in "idea[body]", with: "Shop for shoes in Italy"

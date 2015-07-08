@@ -26,5 +26,6 @@ group :test do
   gem 'launchy'
   gem 'simplecov'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
 end
 
