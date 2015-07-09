@@ -29,6 +29,17 @@ class IdeasController < ApplicationController
     end
   end
 
+  def destroy
+    idea = Idea.find(params[:id])
+    idea.destroy
+
+    respond_with do |format|
+      format.html { redirect_to ideas_path, noticce: "Successfully deleted." }
+      format.json { head :no_content }
+      flash[:notice] = "Successfully deleted."
+    end
+  end
+
   private
   def ideas_params
     params.require(:idea).permit(:title, :body, :quality)

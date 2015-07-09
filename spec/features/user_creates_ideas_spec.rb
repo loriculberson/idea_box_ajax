@@ -13,3 +13,4 @@ RSpec.describe "user creates idea", js: true, type: :feature do
     expect(page).to have_content("Shop for shoes in Italy")
   end
 end
+
