@@ -17,13 +17,12 @@
 
     <tbody id="newest-ideas">
       <% @ideas.each do |idea| %>
-        <tr>
+        <tr class="idea-number-<%= idea.id %>" data-sandwich="<%= idea.id %>">
           <td><%= link_to idea.title, idea %></td>
           <td><%= idea.body %></td>
           <td><%= idea.quality %></td>
-          <td><%= link_to 'Edit', edit_idea_path(idea), remote: true, class: 'btn btn-info btn-xs' %></td>
-          <td><%= link_to 'Delete', idea, remote: true, class: 'btn btn-warning btn-xs',
-                  method: :delete, data: { confirm: 'Are you sure?'}, type: :json  %></td>
+          <td><%= link_to 'Edit', edit_idea_path(idea), class: 'btn btn-info btn-xs' %></td>
+          <td><%= link_to 'Delete', idea, class: 'btn btn-warning btn-xs delete-idea'%></td>
         </tr>
       <% end %>
     </tbody>
