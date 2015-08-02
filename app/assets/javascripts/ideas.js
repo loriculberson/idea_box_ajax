@@ -31,7 +31,7 @@ var addIdeaToTable = function(idea) {
       '<td><a href="/ideas/' + idea.id + '">' + idea.title + '</a></td>' +
       '<td>' + idea.body + '</td>' +
       '<td>' + idea.quality + '</td>' +
-      '<td><a class="btn btn-success btn-xs up-quality" href="/ideas/' + idea.id + '">+</a></td>' +
+      '<td><a class="btn btn-success btn-xs up-quality>+</a></td>' +
       '<td><a class="btn btn-info btn-xs" data-remote="true" href="/ideas/' + idea.id + '/edit">Edit</a></td>' +
       '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + idea.id + '">Delete</a></td>' +
     '</tr>';
