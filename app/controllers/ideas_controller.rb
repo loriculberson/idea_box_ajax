@@ -9,6 +9,10 @@ class IdeasController < ApplicationController
     @ideas = Idea.desc_sorted
   end
 
+  def show
+    @idea = Idea.find(params[:id])
+  end
+
   def create
     @idea = Idea.create(ideas_params)
     if @idea.save
