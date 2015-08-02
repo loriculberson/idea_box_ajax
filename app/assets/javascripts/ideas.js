@@ -1,8 +1,8 @@
 $(document).ready(function(){
 //ajax request to post all
 //create post
-  createIdea()
-  deleteIdea()
+  createIdea();
+  deleteIdea();
 });
 
 function createIdea(){
