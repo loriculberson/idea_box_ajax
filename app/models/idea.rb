@@ -6,4 +6,10 @@ class Idea < ActiveRecord::Base
   def self.desc_sorted
     order(:created_at => :desc)
   end
+
+#converts the string quality value to a number
+#which is needed in the update Quality function
+  def quality_number
+    Idea.qualities[quality]
+  end
 end

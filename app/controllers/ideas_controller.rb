@@ -13,12 +13,24 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
   end
 
+  def update
+    @idea = Idea.find(params[:id])
+    if @idea.update(ideas_params)
+
+      respond_with do |format|
+        format.html { redirect_to ideas_path, noticce: "Successfully updated." }
+        format.json { render json: @idea }
+      end
+    end
+  end
+
   def create
-    @idea = Idea.create(ideas_params)
+    @idea = Idea.new(ideas_params)
     if @idea.save
       respond_with do |format|
         format.html { redirect_to ideas_path, notice: "Your idea was created." }
-        format.json { render json: @idea }
+        format.json { render json: @idea }  
+        #json: @idea is the same as newIdea (in js file) returning as a .json object
       end
     else
 
