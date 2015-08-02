@@ -15,7 +15,7 @@ RSpec.describe Idea, type: :model do
     expect(idea).not_to be_valid
   end
 
-  it "is not valid without a title" do
+  it "is not valid without a body" do
     idea = Idea.create(title: "Random title", body: nil, quality: 2)
     expect(idea).not_to be_valid
   end
