@@ -7,7 +7,7 @@ RSpec.describe "user deletes idea", js: true, type: :feature do
     fill_in "idea[title]", with: "Fabulous idea"
     fill_in "idea[body]", with: "Shop for hats in France"
     choose "plausible"
-    click_on "Save!"
+    click_on "Save"
     click_on "Delete"
 
     expect(page).not_to have_content("Fabulous idea")

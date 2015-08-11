@@ -1,10 +1,10 @@
-<h2> My Ideas </h2>
+<h2> My Ideas </h2><h3> Idea count: <%= @ideas.count %> </h3>
 
 <%= render partial: "form" %>
 
 <div class="ideas-list">
  
-  <h3>Listing Todos</h3>
+  <h3>To Do List</h3> 
   <table class="table table-condensed table-striped">
     <thead>
       <tr class="danger">
@@ -22,8 +22,9 @@
           <td><%= link_to idea.title, idea %></td>
           <td><%= idea.body %></td>
           <td class="quality-text"><%= idea.quality %></td>
-          <td> <%= link_to '+', idea_path(idea), class: 'btn btn-success btn-xs up-quality' %> </td>
-          <td><%= link_to 'Edit', edit_idea_path(idea), class: 'btn btn-info btn-xs' %></td>
+          <td> <%= link_to '+', idea_path(idea), class: 'btn btn-success btn-xs up-quality' %> </td> 
+          <td> <%= link_to '-', idea_path(idea), class: 'btn btn-danger btn-xs down-quality' %> </td> 
+          <td><%= link_to 'Edit', edit_idea_path(idea), class: 'btn btn-info btn-xs edit-idea' %></td>
           <td><%= link_to 'Delete', idea, class: 'btn btn-warning btn-xs delete-idea'%></td>
         </tr>
       <% end %>
