@@ -34,7 +34,7 @@ class IdeasController < ApplicationController
     if @idea.save
       respond_with do |format|
         format.html { redirect_to ideas_path, notice: "Your idea was created." }
-        format.json { render json: @idea }  
+        format.json { render json: @idea.as_json.merge(quality_number: @idea.quality_number) }
         #json: @idea is the same as newIdea (in js file) returning as a .json object
       end
     else

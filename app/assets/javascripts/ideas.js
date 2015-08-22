@@ -32,8 +32,8 @@ var addIdeaToTable = function(idea) {
       '<td><a href="/ideas/' + idea.id + '">' + idea.title + '</a></td>' +
       '<td>' + idea.body + '</td>' +
       '<td class="quality-text">' + idea.quality + '</td>' +
-      '<td><a class="btn btn-success btn-xs up-quality">+</a></td>' +
-      '<td><a class="btn btn-danger btn-xs down-quality">-</a></td>' +
+      '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +
+      '<td><a class="btn btn-danger btn-xs down-quality" href="#">-</a></td>' +
       '<td><a class="btn btn-info btn-xs" data-remote="true" href="/ideas/' + idea.id + '/edit">Edit</a></td>' +
       '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + idea.id + '">Delete</a></td>' +
     '</tr>';
@@ -77,7 +77,6 @@ function upQuality() {
     //this is the button that triggers the event
     event.preventDefault();
     var ideaQuality = $(this).parents('tr').data('quality');
-    debugger;
     var id = $(this).parents('tr').data('id');
     var upButton = $(this);
 
@@ -97,9 +96,7 @@ function upQuality() {
     }).done(function(updatedIdea){
 
       upButton.parents('tr').find('.quality-text').html(updatedIdea.quality);
-      // updateQualityInTable(updatedIdea.quality);
-      //.data('quality' .....this accesses the data attribute in the html)
-      //.data('...ideaQuality' .....this sets the new quality value)
+ 
     })
   })
 }
