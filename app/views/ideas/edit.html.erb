@@ -1,7 +1,9 @@
+<%#= render partial: "form", locals: {idea: @idea, method: :patch } %>
+
 <div class="container">
   <div class="col-md-6">
     <div class="form-area">  
-    <%= form_for(:idea, html: { id: "idea-form" }, role:"form") do |f| %>
+    <%= form_for(:idea, url: idea_path(@idea.id), method: :patch, html: { id: "idea-form" }, role:"form") do |f| %>
 
       <div class="errors">
       </div>
@@ -36,10 +38,12 @@
       </div>
 
       <div>
-        <%= f.submit id: "create-idea", class: "btn btn-primary" %>
+        <%= f.submit "Update", class: "btn btn-primary" %>
       </div>
 
       <% end %>
     </div>
   </div>
 </div>
+
+<%= link_to "<-- Back to Ideas", ideas_path %>
