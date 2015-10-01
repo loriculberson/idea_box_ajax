@@ -37,11 +37,13 @@ function editIdea(){
     $('#save-edited-idea').show();
     $('#create-idea').hide();
 
+
     $.ajax({
       type: 'GET',
       url: '/ideas/' + id
     }).done(function(idea){
       populateEditForm(idea);
+      // $('#save-edited-idea').append('<input type="hidden" id=' + id);
     })
   })
 }
@@ -54,11 +56,11 @@ function populateEditForm(idea){
   var ideaTitle = idea.title;
   var ideaBody = idea.body;
   var ideaQuality = idea.quality;
+  var ideaId = idea.id;
 
   $("#idea_title").val(ideaTitle);
   $("#idea_body").val(ideaBody);
-
-  saveEditedIdea();
+  $('#idea_id').val(ideaId);
 }
 
 function saveEditedIdea(){
@@ -69,13 +71,13 @@ function saveEditedIdea(){
                                   quality: $("input[name='idea[quality]']:checked").val(),
                                 } 
                         }
-    console.log("hi", updatedParams);
-    debugger;
+    var id = $('#idea_id').val();
+
     $.ajax({
       type: 'PATCH',
       contentType: 'application/json', 
       data: JSON.stringify(updatedParams),
-      url: '/ideas' + id,
+      url: '/ideas/' + id,
     }).done(function(updatedIdea){
       updateIdeaOnTable(updatedIdea);
       clearIdeaForm();
@@ -85,17 +87,15 @@ function saveEditedIdea(){
 
 var updateIdeaOnTable = function(updatedIdea) {
   var tr = 
-    '<tr class="idea-number-' + updatedIdea.id + '" data-id="' + updatedIdea.id + '" data-quality="' + idea.quality_number + '">' +
       '<td><a href="/ideas/' + updatedIdea.id + '">' + updatedIdea.title + '</a></td>' +
       '<td>' + updatedIdea.body + '</td>' +
       '<td class="quality-text">' + updatedIdea.quality + '</td>' +
       '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +
       '<td><a class="btn btn-danger btn-xs down-quality" href="#">-</a></td>' +
-      '<td><a class="btn btn-info btn-xs edit-idea" href="/ideas/' + idea.id + '/edit">Edit</a></td>' +
-      '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + idea.id + '">Delete</a></td>' +
-    '</tr>';
+      '<td><a class="btn btn-info btn-xs edit-idea" href="/ideas/' + updatedIdea.id + '/edit">Edit</a></td>' +
+      '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + updatedIdea.id + '">Delete</a></td>';
 
-  $('#newest-ideas').html(tr);
+  $('.idea-number-'+ updatedIdea.id).html(tr);
 }
 
 var addIdeaToTable = function(idea) {
@@ -116,6 +116,8 @@ var addIdeaToTable = function(idea) {
 
 var clearIdeaForm = function() {
   $("#idea-form")[0].reset();
+  $("#idea_id").reset();
+  debugger;
 };
 
 function deleteIdea() {
