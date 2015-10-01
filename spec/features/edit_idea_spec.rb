@@ -1,21 +1,25 @@
 require 'rails_helper'
 
-RSpec.describe "user edits idea", type: :feature do
+RSpec.describe "user edits idea", js: true, type: :feature do 
 
-  it "shows up on the home page" do
-    idea = Idea.create( title: "Really amazing idea", 
-                        body: "Shop for shoes in Italy",
-                        quality: "swill" 
-                      )
-    visit edit_idea_path(idea)
+  def create_idea
+    visit '/'
+    fill_in "idea[title]", with: "Amazing idea"
+    fill_in "idea[body]", with: "Shop for shoes in Italy"
+    choose "swill"
+    click_on "Save"
+  end
 
-    fill_in "idea[title]", with: "Super duper idea"
-    fill_in "idea[body]", with: "Move to an interesting city"
+  it "can be edited immediately after creation" do
+    create_idea
+        
+    click_on "Edit"
+    fill_in "idea[body]", with: "Shoe shopping in France!"
     click_on "Update"
 
     within 'table' do
-      expect(page).to have_content("Super duper idea")
+      expect(page).not_to have_content("Shop for shoes in Italy")
+      expect(page).to have_content("Shoe shopping in France!")
     end
-
   end
 end
