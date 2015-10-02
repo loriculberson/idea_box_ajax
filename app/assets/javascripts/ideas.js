@@ -61,6 +61,8 @@ function populateEditForm(idea){
   $("#idea_title").val(ideaTitle);
   $("#idea_body").val(ideaBody);
   $('#idea_id').val(ideaId);
+  $('input[name="idea[quality]"][value="' + ideaQuality + '"]').prop('checked', true);
+// <input type="radio" value="swill" checked="checked" name="idea[quality]" id="idea_quality_swill">
 }
 
 function saveEditedIdea(){
@@ -68,9 +70,10 @@ function saveEditedIdea(){
     event.preventDefault();
     var updatedParams = { idea: { title: $("#idea_title").val(),
                                   body: $("#idea_body").val(),
-                                  quality: $("input[name='idea[quality]']").val(),
-                                } 
+                                  quality: $("input[name='idea[quality]']:checked").val(),
+                                }
                         }
+
     var id = $('#idea_id').val();
 
     $.ajax({
@@ -115,7 +118,7 @@ var addIdeaToTable = function(idea) {
 
 var clearIdeaForm = function() {
   $("#idea-form")[0].reset();
-  $("#idea_id").reset();
+  // $("#idea_id").reset();
 };
 
 function deleteIdea() {
