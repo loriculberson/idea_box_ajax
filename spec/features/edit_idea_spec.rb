@@ -15,11 +15,24 @@ RSpec.describe "user edits idea", js: true, type: :feature do
         
     click_on "Edit"
     fill_in "idea[body]", with: "Shoe shopping in France!"
-    click_on "Update"
+    click_on "Edit Idea"
 
     within 'table' do
       expect(page).not_to have_content("Shop for shoes in Italy")
       expect(page).to have_content("Shoe shopping in France!")
+    end
+  end
+
+  it "can update a quality of an idea" do 
+    create_idea
+
+    click_on "Edit"
+    choose "genius"
+    click_on "Edit Idea"
+
+    within 'table' do 
+      expect(page).not_to have_content("swill")
+      expect(page).to have_content("genius")
     end
   end
 end
