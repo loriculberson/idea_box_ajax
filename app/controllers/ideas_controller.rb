@@ -5,16 +5,15 @@ class IdeasController < ApplicationController
     @idea = Idea.new 
   end
 
-  def edit
-    @idea = Idea.find(params[:id])
-  end
-
   def index
     @ideas = Idea.desc_sorted
   end
 
   def show
     @idea = Idea.find(params[:id])
+    render json: @idea 
+    #render json will override the default behavior which is to 
+    #render a view
   end
 
   def update
