@@ -2,6 +2,7 @@
   <div class="col-md-6">
     <div class="form-area">  
     <%= hidden_field_tag :idea_id, value: '' %>
+    
     <%= form_for(:idea, html: { id: "idea-form" }, role: "form") do |f| %>
 
       <div class="errors">
