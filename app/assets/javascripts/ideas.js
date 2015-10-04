@@ -24,9 +24,22 @@ function createIdea(){
       success: function(newIdea){
         addIdeaToTable(newIdea);
         clearIdeaForm();
+        upIdeaCount();
       }
     })
   })
+}
+
+function upIdeaCount(){
+  var counter = $("#idea_counter").text();
+  counter++;
+  $('#idea_counter').html(counter);
+}
+
+function downIdeaCount(){
+  var counter = $("#idea_counter").text();
+  counter--;
+  $('#idea_counter').html(counter);
 }
 
 function editIdea(){
@@ -43,16 +56,11 @@ function editIdea(){
       url: '/ideas/' + id
     }).done(function(idea){
       populateEditForm(idea);
-      // $('#save-edited-idea').append('<input type="hidden" id=' + id);
     })
   })
 }
 
 function populateEditForm(idea){
-  // add the title and body back into the form DONE
-  // add the quality to the radio button by matching what is in the database with 
-  //the value already stored in the button
-  //pass the idea id to the "edit" button
   var ideaTitle = idea.title;
   var ideaBody = idea.body;
   var ideaQuality = idea.quality;
@@ -62,7 +70,6 @@ function populateEditForm(idea){
   $("#idea_body").val(ideaBody);
   $('#idea_id').val(ideaId);
   $('input[name="idea[quality]"][value="' + ideaQuality + '"]').prop('checked', true);
-// <input type="radio" value="swill" checked="checked" name="idea[quality]" id="idea_quality_swill">
 }
 
 function saveEditedIdea(){
@@ -84,6 +91,9 @@ function saveEditedIdea(){
     }).done(function(updatedIdea){
       updateIdeaOnTable(updatedIdea);
       clearIdeaForm();
+      $('#save-edited-idea').hide();
+      $('#create-idea').show();
+
     })
   })
 }
@@ -96,7 +106,7 @@ var updateIdeaOnTable = function(updatedIdea) {
       '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +
       '<td><a class="btn btn-danger btn-xs down-quality" href="#">-</a></td>' +
       '<td><a class="btn btn-info btn-xs edit-idea" href="/ideas/' + updatedIdea.id + '/edit">Edit</a></td>' +
-      '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + updatedIdea.id + '">Delete</a></td>';
+      '<td><a class="btn btn-warning btn-xs delete-idea" href="/ideas/' + updatedIdea.id + '">Delete</a></td>';
 
   $('.idea-number-'+ updatedIdea.id).html(td);
 }
@@ -110,7 +120,7 @@ var addIdeaToTable = function(idea) {
       '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +
       '<td><a class="btn btn-danger btn-xs down-quality" href="#">-</a></td>' +
       '<td><a class="btn btn-info btn-xs edit-idea" href="/ideas/' + idea.id + '/edit">Edit</a></td>' +
-      '<td><a class="btn btn-warning btn-xs" rel="nofollow" data-method="delete" href="/ideas/' + idea.id + '">Delete</a></td>' +
+      '<td><a class="btn btn-warning btn-xs delete-idea" href="/ideas/' + idea.id + '">Delete</a></td>' +
     '</tr>';
 
   $('#newest-ideas').prepend(tr);
@@ -118,22 +128,22 @@ var addIdeaToTable = function(idea) {
 
 var clearIdeaForm = function() {
   $("#idea-form")[0].reset();
-  // $("#idea_id").reset();
 };
 
 function deleteIdea() {
-  $('.delete-idea').on('click', function(event){
+  $("#newest-ideas").on('click', '.delete-idea', function(event) {
+    debugger;
     event.preventDefault();
     var id = $(this).parents('tr').data('id');
 
     $.ajax({
       type: 'DELETE',
-      url: '/ideas/' + id,
-      success: function(){
-        removeIdeaFromTable(id);
-      }
+      url: '/ideas/' + id 
+    }).done(function(){
+      removeIdeaFromTable(id);
+      downIdeaCount();
     })
-  });
+  })
 }
 
 var removeIdeaFromTable = function(id) {
