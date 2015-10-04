@@ -1,5 +1,5 @@
 class IdeasController < ApplicationController
-  respond_to :json, :html
+  respond_to :json
 
   def new
     @idea = Idea.new 
@@ -22,7 +22,6 @@ class IdeasController < ApplicationController
     if @idea.save
 
       respond_with do |format|
-        format.html { redirect_to ideas_path, noticce: "Successfully updated." }
         format.json { render json: @idea }
       end
     end
@@ -32,7 +31,6 @@ class IdeasController < ApplicationController
     @idea = Idea.new(ideas_params)
     if @idea.save
       respond_with do |format|
-        format.html { redirect_to ideas_path, notice: "Your idea was created." }
         format.json { render json: @idea.as_json.merge(quality_number: @idea.quality_number) }
         #json: @idea is the same as newIdea (in js file) returning as a .json object
       end
