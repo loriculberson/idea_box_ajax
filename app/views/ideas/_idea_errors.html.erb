@@ -1,0 +1,12 @@
+<% if @idea && @idea.errors.any? %>
+  <div id="error-explanation">
+    <div class="alert alert-danger">
+      Your form contains <%= pluralize(@idea.errors.count, "error") %>.
+    </div>
+    <ul>
+      <% @idea.errors.full_messages.each do |msg| %>
+        <li> <%= msg %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
