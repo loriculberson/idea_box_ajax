@@ -22,9 +22,14 @@ function createIdea(){
       url: '/ideas',
       data: ideaParams,
       success: function(newIdea){
+        $('.errors').html('');
         addIdeaToTable(newIdea);
         clearIdeaForm();
         upIdeaCount();
+      },
+      error: function(xhr){
+        var errors = $.parseJSON(xhr.responseText).errors; 
+        $('.errors').html(errors);
       }
     })
   })
@@ -100,7 +105,7 @@ function saveEditedIdea(){
 
 var updateIdeaOnTable = function(updatedIdea) {
   var td = 
-      '<td><a href="/ideas/' + updatedIdea.id + '">' + updatedIdea.title + '</a></td>' +
+      '<td>' + updatedIdea.title + '</td>' +
       '<td>' + updatedIdea.body + '</td>' +
       '<td class="quality-text">' + updatedIdea.quality + '</td>' +
       '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +
@@ -114,7 +119,7 @@ var updateIdeaOnTable = function(updatedIdea) {
 var addIdeaToTable = function(idea) {
   var tr = 
     '<tr class="idea-number-' + idea.id + '" data-id="' + idea.id + '" data-quality="' + idea.quality_number + '">' +
-      '<td><a href="/ideas/' + idea.id + '">' + idea.title + '</a></td>' +
+      '<td>' + idea.title + '</td>' +
       '<td>' + idea.body + '</td>' +
       '<td class="quality-text">' + idea.quality + '</td>' +
       '<td><a class="btn btn-success btn-xs up-quality" href="#">+</a></td>' +

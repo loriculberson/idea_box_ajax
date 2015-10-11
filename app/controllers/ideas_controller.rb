@@ -35,7 +35,7 @@ class IdeasController < ApplicationController
         #json: @idea is the same as newIdea (in js file) returning as a .json object
       end
     else
-      format.json { render json:  { errors: @item.errors.messages }, status: 400 }
+      render json:  { errors: @idea.errors.full_messages }, status: 422
     end
   end
 
